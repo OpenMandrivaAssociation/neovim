@@ -1,14 +1,14 @@
 Name: neovim
-Version: 0.1.4
+Version: 0.1.5
 Release: 1
 # 
 Source0: https://github.com/neovim/neovim/archive/v%{version}.tar.gz
 Source1: https://github.com/neovim/deps/raw/master/opt/LuaJIT-2.0.4.tar.gz
 Source2: https://github.com/mauke/unibilium/archive/v1.2.0.tar.gz
 Source3: https://github.com/neovim/libvterm/archive/a9c7c6fd20fa35e0ad3e0e98901ca12dfca9c25c.tar.gz
-Source4: https://github.com/msgpack/msgpack-c/archive/cpp-1.0.0.tar.gz
-Source5: https://github.com/libuv/libuv/archive/v1.8.0.tar.gz
-Source6: https://github.com/jemalloc/jemalloc/releases/download/4.0.2/jemalloc-4.0.2.tar.bz2
+Source4: https://github.com/msgpack/msgpack-c/archive/cpp-2.0.0.tar.gz
+Source5: https://github.com/libuv/libuv/archive/v1.9.1.tar.gz
+Source6: https://github.com/jemalloc/jemalloc/releases/download/4.2.1/jemalloc-4.2.1.tar.bz2
 Source7: https://github.com/keplerproject/luarocks/archive/5d8a16526573b36d5b22aa74866120c998466697.tar.gz
 Summary: A fork of the vim editor for better extensibility
 URL: http://neovim.io/
