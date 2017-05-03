@@ -1,5 +1,5 @@
 Name: neovim
-Version: 0.1.7
+Version: 0.2.0
 Release: 1
 Source0: https://github.com/neovim/neovim/archive/v%{version}.tar.gz
 Patch0:  neovim-0.1.7-bitop.patch
