@@ -1,5 +1,5 @@
 Name: neovim
-Version: 0.2.0
+Version: 0.2.1
 Release: 1
 Source0: https://github.com/neovim/neovim/archive/v%{version}.tar.gz
 Patch0:  neovim-0.1.7-bitop.patch
@@ -13,6 +13,7 @@ BuildRequires: pkgconfig(vterm)
 BuildRequires: pkgconfig(jemalloc)
 BuildRequires: pkgconfig(libuv)
 BuildRequires: pkgconfig(msgpack)
+BuildRequires: pkgconfig(luajit)
 BuildRequires: lua-mpack
 BuildRequires: lua-lpeg
 BuildRequires: gperf
@@ -39,3 +40,5 @@ A fork of the vim editor for better extensibility
 %{_bindir}/*
 %{_datadir}/nvim
 %{_mandir}/man1/*
+%{_datadir}/applications/nvim.desktop
+%{_datadir}/pixmaps/nvim.png

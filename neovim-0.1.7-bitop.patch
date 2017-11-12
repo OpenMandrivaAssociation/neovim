@@ -3,7 +3,7 @@ Index: neovim-0.1.7/CMakeLists.txt
 --- neovim-0.1.7.orig/CMakeLists.txt
 +++ neovim-0.1.7/CMakeLists.txt
 @@ -386,7 +386,7 @@ endforeach()
- 
+
  # Find Lua interpreter
  include(LuaHelpers)
 -set(LUA_DEPENDENCIES lpeg mpack bit)
@@ -16,8 +16,8 @@ Index: neovim-0.1.7/src/nvim/ex_cmds.lua
 --- neovim-0.1.7.orig/src/nvim/ex_cmds.lua
 +++ neovim-0.1.7/src/nvim/ex_cmds.lua
 @@ -1,4 +1,4 @@
--bit = require 'bit'
-+bit = require 'bit32'
- 
+-local bit = require 'bit'
++local bit = require 'bit32'
+
  -- Description of the values below is contained in ex_cmds_defs.h file.
  local RANGE      =    0x001
