@@ -1,7 +1,7 @@
 %bcond_with jemalloc
 
 Name:           neovim
-Version:        0.3.2
+Version:        0.3.4
 Release:        1
 
 License:        ASL 2.0
