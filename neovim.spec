@@ -38,7 +38,6 @@ Provides:	nvim = %{version}-%{release}
 Recommends:	xclip
 Recommends:	python2dist(pynvim)
 Recommends:	python3dist(pynvim)
-Recommends:	npm(neovim)
 
 %description
 Neovim is a project that seeks to aggressively refactor Vim in order to:
