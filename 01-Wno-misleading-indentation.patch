@@ -1,0 +1,13 @@
+Index: neovim-0.4.2/Makefile
+===================================================================
+--- neovim-0.4.2/Makefile
++++ neovim-0.4.2/Makefile	2019-09-18 09:17:43.688230447 +0200
+@@ -11,7 +11,7 @@
+ CMAKE_BUILD_TYPE ?= Debug
+ CMAKE_FLAGS := -DCMAKE_BUILD_TYPE=$(CMAKE_BUILD_TYPE)
+ # Extra CMake flags which extend the default set
+-CMAKE_EXTRA_FLAGS ?=
++CMAKE_EXTRA_FLAGS ?= -Wno-misleading-indentation
+ 
+ # CMAKE_INSTALL_PREFIX
+ #   - May be passed directly or as part of CMAKE_EXTRA_FLAGS.
