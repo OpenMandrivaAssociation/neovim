@@ -4,7 +4,7 @@
 %define luaver	5.3
 
 Name:		neovim
-Version:	0.4.3
+Version:	0.4.4
 Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
