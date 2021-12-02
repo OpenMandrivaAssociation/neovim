@@ -2,7 +2,7 @@
 %define _fortify_cflags %nil
 
 Name:		neovim
-Version:	0.5.1
+Version:	0.6.0
 Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
@@ -12,7 +12,7 @@ Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}
 Source1:        sysinit.vim
 Source2:        spec-template
 # We add an extra build option to disable this error from stopping the build
-Patch0:		01-Wno-misleading-indentation.patch
+#Patch0:		01-Wno-misleading-indentation.patch
 BuildRequires:	cmake
 BuildRequires:	gperf
 BuildRequires:	luajit
