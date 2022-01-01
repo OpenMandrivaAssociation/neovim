@@ -1,0 +1,12 @@
+diff -up neovim-0.6.1/src/nvim/terminal.c.omv~ neovim-0.6.1/src/nvim/terminal.c
+--- neovim-0.6.1/src/nvim/terminal.c.omv~	2022-01-01 15:24:22.238128254 +0100
++++ neovim-0.6.1/src/nvim/terminal.c	2022-01-01 15:24:29.649147767 +0100
+@@ -844,7 +844,7 @@ static int term_settermprop(VTermProp pr
+ 
+   case VTERM_PROP_TITLE: {
+     buf_T *buf = handle_get_buffer(term->buf_handle);
+-    buf_set_term_title(buf, val->string);
++    buf_set_term_title(buf, val->string.str);
+     break;
+   }
+ 
