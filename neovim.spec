@@ -33,6 +33,7 @@ BuildRequires:	pkgconfig(tree-sitter)
 Requires:	%{name}-data >= %{version}-%{release}
 Requires:	luajit
 Provides:	nvim = %{version}-%{release}
+Requires:	libluv
 Recommends:	xclip
 Recommends:	python2dist(pynvim)
 Recommends:	python3dist(pynvim)
