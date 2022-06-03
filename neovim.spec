@@ -2,7 +2,7 @@
 %define _fortify_cflags %nil
 
 Name:		neovim
-Version:	0.6.1
+Version:	0.7.0
 Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
@@ -19,7 +19,7 @@ BuildRequires:	gperf
 BuildRequires:	luajit
 BuildRequires:	luajit-lpeg
 BuildRequires:	luajit-mpack
-BuildRequires:	libluv-devel
+BuildRequires:	libluv-devel >= 1.43.0
 BuildRequires:	ninja
 BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(libuv)
@@ -77,7 +77,6 @@ install -p -m 644 %SOURCE2 %{buildroot}%{_datadir}/nvim/template.spec
 %find_lang nvim
 
 %files
-%license LICENSE
 %doc BACKERS.md CONTRIBUTING.md README.md
 %{_bindir}/nvim
 %{_mandir}/man1/nvim.1*
