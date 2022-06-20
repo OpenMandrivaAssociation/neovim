@@ -2,11 +2,10 @@ Name:
 Version:
 Release:        1
 Summary:
-
+Group:
 License:
 URL:
 Source0:
-
 BuildRequires:
 Requires:
 
@@ -14,11 +13,11 @@ Requires:
 
 
 %prep
-%autosetup
+%autosetup -p1
+%configure
 
 
 %build
-%configure
 %make_build
 
 
@@ -32,6 +31,3 @@ Requires:
 %files
 %license
 %doc
-
-
-%changelog
