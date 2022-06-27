@@ -2,8 +2,8 @@
 %define _fortify_cflags %nil
 
 Name:		neovim
-Version:	0.7.0
-Release:	2
+Version:	0.7.2
+Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
 License:	ASL 2.0
