@@ -3,7 +3,7 @@
 
 Name:		neovim
 Version:	0.7.2
-Release:	1
+Release:	2
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
 License:	ASL 2.0
@@ -37,6 +37,7 @@ Requires:	libluv
 Recommends:	xclip
 Recommends:	python2dist(pynvim)
 Recommends:	python3dist(pynvim)
+Provides:	texteditor
 
 %description
 Neovim is a project that seeks to aggressively refactor Vim in order to:
