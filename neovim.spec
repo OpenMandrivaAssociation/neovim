@@ -2,8 +2,8 @@
 %define _fortify_cflags %nil
 
 Name:		neovim
-Version:	0.7.2
-Release:	2
+Version:	0.8.0
+Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
 License:	ASL 2.0
@@ -13,7 +13,7 @@ Source1:        sysinit.vim
 Source2:        spec-template
 # We add an extra build option to disable this error from stopping the build
 #Patch0:		01-Wno-misleading-indentation.patch
-Patch1:		neovim-0.6.1-compile.patch
+#Patch1:		neovim-0.6.1-compile.patch
 BuildRequires:	cmake
 BuildRequires:	gperf
 BuildRequires:	luajit
@@ -57,7 +57,7 @@ Data files for %{name}.
 %prep
 %autosetup -p1
 
-sed -i "s|sys/end|bsd/sys/end|g" config/CMakeLists.txt
+#sed -i "s|sys/end|bsd/sys/end|g" config/CMakeLists.txt
 
 %build
 export HOSTNAME=abf.openmandriva.org
