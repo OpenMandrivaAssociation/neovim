@@ -2,7 +2,7 @@
 %define _fortify_cflags %nil
 
 Name:		neovim
-Version:	0.8.0
+Version:	0.8.1
 Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
