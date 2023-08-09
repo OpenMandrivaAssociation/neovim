@@ -1,0 +1,28 @@
+diff -up neovim-0.9.1/runtime/syntax/cpp.vim.omv~ neovim-0.9.1/runtime/syntax/cpp.vim
+--- neovim-0.9.1/runtime/syntax/cpp.vim.omv~	2023-08-09 15:54:10.443488315 +0200
++++ neovim-0.9.1/runtime/syntax/cpp.vim	2023-08-09 15:58:45.143126293 +0200
+@@ -99,6 +99,24 @@ if !exists("cpp_no_cpp20")
+   syn keyword cppModule		import module export
+ endif
+ 
++" Qt extensions
++if !exists("cpp_no_qt")
++  syn keyword qtKeywords	signals slots emit foreach forever Q_SIGNALS Q_SLOTS Q_EMIT
++  syn keyword qtMacros		Q_OBJECT Q_WIDGET Q_PROPERTY Q_ENUMS Q_OVERRIDE Q_CLASSINFO Q_SETS SIGNAL SLOT METHOD Q_DECLARE_INTERFACE Q_INTERFACES Q_EXPORT QDOC_PROPERTY Q_DECLARE_FLAGS Q_DECLARE_INTERFACE Q_DECLARE_METATYPE Q_DECLARE_TR_FUNCTIONS Q_DECLARE_TYPEINFO Q_DECLARE_PRIVATE Q_FOREACH Q_FOREVER Q_IMPORT_PLUGIN Q_INTERFACES Q_EXPORT_PLUGIN Q_EXPORT_PLUGIN2 Q_ARG Q_RETURN_ARG QT_BEGIN_HEADER QT_END_HEADER QT_BEGIN_NAMESPACE QT_END_NAMESPACE QT_MODULE Q_PRIVATE_SLOT Q_PRIVATE_PROPERTY Q_FLAGS Q_SCRIPTABLE Q_INVOKABLE Q_SIGNAL Q_SLOT READ WRITE DESIGNABLE SCRIPTABLE CONSTANT
++  syn match qtCast		"\<\(qt\|qobject\|qvariant\|qstyleoption\)_cast\s*<"me=e-1
++  syn match qtCast		"\<\(qt\|qobject\|qvariant\|qstyleoption\)_cast\s*$"
++  syn keyword qtTypedef		uchar uint ushort ulong Q_INT8 Q_UINT8 Q_INT16 Q_UINT16 Q_INT32 Q_UINT32 Q_LONG Q_ULONG Q_INT64 Q_UINT64 Q_LLONG Q_ULLONG pchar puchar pcchar qint8 quint8 qint16 quint16 qint32 quint32 qint64 quint64 qlonglong qulonglong
++  syn keyword qtBaseClass	QString QStringLiteral QLatin1String QByteArray QHash QMap QVector QList QStringList QObject QWidget
++  syn keyword cRepeat		foreach
++  syn keyword cRepeat		forever
++
++  hi def link qtKeywords	Statement
++  hi def link qtCast		Statement
++  hi def link qtMacros		Type
++  hi def link qtTypedef		Type
++  hi def link qtBaseClass	Type
++endif
++
+ " The minimum and maximum operators in GNU C++
+ syn match cppMinMax "[<>]?"
+ 
