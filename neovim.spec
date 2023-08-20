@@ -3,7 +3,7 @@
 
 Name:		neovim
 Version:	0.9.1
-Release:	1
+Release:	2
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
 License:	ASL 2.0
@@ -73,10 +73,13 @@ export HOSTNAME=abf.openmandriva.org
 install -p -m 644 %SOURCE1 %{buildroot}%{_datadir}/nvim/sysinit.vim
 install -p -m 644 %SOURCE2 %{buildroot}%{_datadir}/nvim/template.spec
 
+ln -s nvim %{buildroot}%{_bindir}/vi
+
 %find_lang nvim
 
 %files
 %doc BACKERS.md CONTRIBUTING.md README.md
+%{_bindir}/vi
 %{_bindir}/nvim
 %{_mandir}/man1/nvim.1*
 %{_datadir}/applications/nvim.desktop
