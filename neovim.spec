@@ -30,11 +30,12 @@ BuildRequires:	pkgconfig(libbsd)
 BuildRequires:	pkgconfig(tree-sitter)
 Requires:	%{name}-data >= %{version}-%{release}
 Requires:	luajit
+Requires:	luajit-lpeg
+Requires:	luajit-mpack
 Provides:	nvim = %{version}-%{release}
 Requires:	libluv
 Recommends:	xclip
-Recommends:	python2dist(pynvim)
-Recommends:	python3dist(pynvim)
+Recommends:	python%{pyver}dist(pynvim)
 Provides:	texteditor
 
 %description
