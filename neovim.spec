@@ -1,5 +1,12 @@
 # build will override this anyway, so let's skip it
 %define _fortify_cflags %nil
+%if %{cross_compiling}
+# FIXME The build system throws out some compiler flags while
+# running cpp -E, so it doesn't invoke the correct -target
+# when using clang (but does when using gcc, because it
+# calls the separate $TARGET-cpp)
+%define prefer_gcc 1
+%endif
 
 Name:		neovim
 Version:	0.9.1
@@ -37,6 +44,9 @@ Requires:	libluv
 Recommends:	xclip
 Recommends:	python%{pyver}dist(pynvim)
 Provides:	texteditor
+%if %{cross_compiling}
+BuildRequires:	neovim
+%endif
 
 %description
 Neovim is a project that seeks to aggressively refactor Vim in order to:
@@ -57,6 +67,12 @@ Data files for %{name}.
 %autosetup -p1
 
 #sed -i "s|sys/end|bsd/sys/end|g" config/CMakeLists.txt
+
+%if %{cross_compiling}
+# Avoid running TARGET binaries...
+sed -i -e 's,\$<TARGET_FILE:nvim>,%{_bindir}/nvim,g' src/nvim/po/CMakeLists.txt test/CMakeLists.txt
+sed -i -e 's,\${PROJECT_BINARY_DIR}/bin/nvim,%{_bindir}/nvim,g' runtime/CMakeLists.txt
+%endif
 
 %build
 export HOSTNAME=abf.openmandriva.org
