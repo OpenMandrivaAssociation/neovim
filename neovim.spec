@@ -9,8 +9,8 @@
 %endif
 
 Name:		neovim
-Version:	0.9.1
-Release:	3
+Version:	0.9.2
+Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
 License:	ASL 2.0
@@ -28,7 +28,7 @@ BuildRequires:	libluv-devel >= 1.43.0
 BuildRequires:	ninja
 BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(libuv)
-BuildRequires:	pkgconfig(msgpack)
+BuildRequires:	pkgconfig(msgpack-c)
 BuildRequires:	pkgconfig(unibilium)
 BuildRequires:	pkgconfig(termkey)
 BuildRequires:	pkgconfig(vterm)
