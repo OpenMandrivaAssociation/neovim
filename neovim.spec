@@ -26,6 +26,8 @@ BuildRequires:	luajit-lpeg
 BuildRequires:	luajit-mpack
 BuildRequires:	libluv-devel >= 1.43.0
 BuildRequires:	ninja
+# As of 0.9.4, SV translations are ISO-8859-1
+BuildRequires:	locales-extra-charsets
 BuildRequires:	pkgconfig(luajit)
 BuildRequires:	pkgconfig(libuv)
 BuildRequires:	pkgconfig(msgpack-c)
