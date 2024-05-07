@@ -19,6 +19,7 @@ Source0:	https://github.com/neovim/neovim/archive/v%{version}/%{name}-%{version}
 Source1:        sysinit.vim
 Source2:        spec-template
 Patch0:		neovim-c++syntax-qt-extensions.patch
+Patch1:		neovim-spec-syntax-updates.patch
 BuildRequires:	cmake
 BuildRequires:	gperf
 BuildRequires:	luajit
