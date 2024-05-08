@@ -20,13 +20,12 @@ Source1:        sysinit.vim
 Source2:        spec-template
 Patch0:		neovim-c++syntax-qt-extensions.patch
 Patch1:		neovim-spec-syntax-updates.patch
-BuildRequires:	cmake
 BuildRequires:	gperf
+BuildRequires:	gettext
 BuildRequires:	luajit
 BuildRequires:	luajit-lpeg
 BuildRequires:	luajit-mpack
 BuildRequires:	libluv-devel >= 1.43.0
-BuildRequires:	ninja
 # As of 0.9.4, SV translations are ISO-8859-1
 BuildRequires:	locales-extra-charsets
 BuildRequires:	pkgconfig(luajit)
@@ -50,6 +49,11 @@ Provides:	texteditor
 %if %{cross_compiling}
 BuildRequires:	neovim
 %endif
+BuildSystem:	cmake
+BuildOption:	-DPREFER_LUA:BOOL=OFF
+BuildOption:	-DUSE_BUNDLED_LUAJIT:BOOL=OFF
+BuildOption:	-DUSE_BUNDLED:BOOL=OFF
+BuildOption:	-DLUA_PRG=%{_bindir}/luajit
 
 %description
 Neovim is a project that seeks to aggressively refactor Vim in order to:
@@ -66,30 +70,17 @@ BuildArch:	noarch
 %description data
 Data files for %{name}.
 
-%prep
-%autosetup -p1
-
-#sed -i "s|sys/end|bsd/sys/end|g" config/CMakeLists.txt
-
+%prep -a
 %if %{cross_compiling}
 # Avoid running TARGET binaries...
 sed -i -e 's,\$<TARGET_FILE:nvim>,%{_bindir}/nvim,g' src/nvim/po/CMakeLists.txt test/CMakeLists.txt
 sed -i -e 's,\${PROJECT_BINARY_DIR}/bin/nvim,%{_bindir}/nvim,g' runtime/CMakeLists.txt
 %endif
 
-%build
+%build -p
 export HOSTNAME=abf.openmandriva.org
-%cmake	-GNinja \
-	-DPREFER_LUA=OFF \
-	-DUSE_BUNDLED_LUAJIT=OFF \
-	-DUSE_BUNDLED=OFF \
-	-DLUA_PRG=%{_bindir}/luajit
 
-%ninja_build
-
-%install
-%ninja_install -C build
-
+%install -a
 install -p -m 644 %SOURCE1 %{buildroot}%{_datadir}/nvim/sysinit.vim
 install -p -m 644 %SOURCE2 %{buildroot}%{_datadir}/nvim/template.spec
 

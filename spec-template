@@ -8,25 +8,11 @@ URL:
 Source0:
 BuildRequires:
 Requires:
+BuildSystem:
 
 %description
 
-
-%prep
-%autosetup -p1
-%configure
-
-
-%build
-%make_build
-
-
-%install
-%make_install
-
-
 %check
-
 
 %files
 %license
