@@ -9,7 +9,7 @@
 %endif
 
 Name:		neovim
-Version:	0.9.5
+Version:	0.10.0
 Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
@@ -89,7 +89,7 @@ ln -s nvim %{buildroot}%{_bindir}/vi
 %find_lang nvim
 
 %files
-%doc BACKERS.md CONTRIBUTING.md README.md
+%doc CONTRIBUTING.md README.md
 %{_bindir}/vi
 %{_bindir}/nvim
 %{_mandir}/man1/nvim.1*

@@ -12,4 +12,6 @@ augroup Fedora
   autocmd BufNewFile *.spec silent! 0read /usr/share/nvim/template.spec
 augroup END
 
+colorscheme vim
+
 " vim: et ts=2 sw=2
