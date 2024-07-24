@@ -9,7 +9,7 @@
 %endif
 
 Name:		neovim
-Version:	0.10.0
+Version:	0.10.1
 Release:	1
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
