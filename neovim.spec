@@ -10,7 +10,7 @@
 
 Name:		neovim
 Version:	0.10.4
-Release:	1
+Release:	2
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
 License:	ASL 2.0
@@ -37,14 +37,27 @@ BuildRequires:	pkgconfig(vterm)
 BuildRequires:	pkgconfig(jemalloc)
 BuildRequires:	pkgconfig(libbsd)
 BuildRequires:	pkgconfig(tree-sitter)
+BuildRequires:  pkgconfig(tree-sitter-c)
+BuildRequires:  pkgconfig(tree-sitter-lua)
+BuildRequires:  pkgconfig(tree-sitter-markdown)
+BuildRequires:  pkgconfig(tree-sitter-query)
+BuildRequires:  pkgconfig(tree-sitter-vim)
+BuildRequires:  pkgconfig(tree-sitter-vimdoc)
 Requires:	%{name}-data >= %{version}-%{release}
 Requires:	luajit
 Requires:	luajit-lpeg
 Requires:	luajit-mpack
-Provides:	nvim = %{version}-%{release}
+Requires:   %{_lib}tree-sitter-c
+Requires:   %{_lib}tree-sitter-lua
+Requires:   %{_lib}tree-sitter-markdown
+Requires:   %{_lib}tree-sitter-query
+Requires:   %{_lib}tree-sitter-vim 
+Requires:   %{_lib}tree-sitter-vimdoc
 Requires:	libluv
 Recommends:	xclip
 Recommends:	python%{pyver}dist(pynvim)
+Provides:   %{_lib}nvim = %{version}-%{release}
+Provides:	nvim = %{version}-%{release}
 Provides:	texteditor
 %if %{cross_compiling}
 BuildRequires:	neovim
@@ -85,6 +98,12 @@ install -p -m 644 %SOURCE1 %{buildroot}%{_datadir}/nvim/sysinit.vim
 install -p -m 644 %SOURCE2 %{buildroot}%{_datadir}/nvim/template.spec
 
 ln -s nvim %{buildroot}%{_bindir}/vi
+
+# Link to the directory in which sys
+install -d %{buildroot}%{_libdir}/tree_sitter
+
+mkdir -p  %{buildroot}%{_libdir}/tree_sitter
+ln -s -r  %{buildroot}%{_libdir}/tree_sitter    %{buildroot}%{_datadir}/nvim/runtime/parser
 
 %find_lang nvim
 
