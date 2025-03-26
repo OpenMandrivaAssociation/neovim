@@ -43,6 +43,7 @@ BuildRequires:  pkgconfig(tree-sitter-markdown)
 BuildRequires:  pkgconfig(tree-sitter-query)
 BuildRequires:  pkgconfig(tree-sitter-vim)
 BuildRequires:  pkgconfig(tree-sitter-vimdoc)
+BuildRequires:	pkgconfig(libutf8proc)
 Requires:	%{name}-data >= %{version}-%{release}
 Requires:	luajit
 Requires:	luajit-lpeg
