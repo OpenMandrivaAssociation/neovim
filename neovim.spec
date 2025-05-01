@@ -10,7 +10,7 @@
 
 Name:		neovim
 Version:	0.11.1
-Release:	1
+Release:	2
 Summary:	Vim-fork focused on extensibility and usability
 Group:		Editors
 License:	ASL 2.0

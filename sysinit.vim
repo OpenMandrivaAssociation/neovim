@@ -14,4 +14,11 @@ augroup END
 
 colorscheme vim
 
+" This disables mouse integration such as the right-click context menu,
+" but allows cut&paste to work as long time vi users have come to expect.
+" If you prefer mouse integration, override this value with
+" set mouse=nvi
+" in your per-user ~/.config/nvim/init.vim
+set mouse=
+
 " vim: et ts=2 sw=2
