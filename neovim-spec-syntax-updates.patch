@@ -1,7 +1,7 @@
-diff -up neovim-0.11.0/runtime/syntax/spec.vim.2~ neovim-0.11.0/runtime/syntax/spec.vim
---- neovim-0.11.0/runtime/syntax/spec.vim.2~	2025-03-26 14:48:09.000000000 +0100
-+++ neovim-0.11.0/runtime/syntax/spec.vim	2025-03-26 22:52:00.594714066 +0100
-@@ -81,8 +81,8 @@ syn keyword specMacroNameLocal contained
+diff -up neovim-0.12.0/runtime/syntax/spec.vim.2~ neovim-0.12.0/runtime/syntax/spec.vim
+--- neovim-0.12.0/runtime/syntax/spec.vim.2~	2026-03-29 18:16:17.000000000 +0200
++++ neovim-0.12.0/runtime/syntax/spec.vim	2026-03-29 22:56:54.300641209 +0200
+@@ -83,8 +83,8 @@ syn keyword specMacroNameLocal contained
  
  "One line macros - valid in all ScriptAreas
  "tip: remember do include new items on specScriptArea's skip section
@@ -12,16 +12,16 @@ diff -up neovim-0.11.0/runtime/syntax/spec.vim.2~ neovim-0.11.0/runtime/syntax/s
  
  "%% Files Section %%
  "TODO %config valid parameters: missingok\|noreplace
-@@ -103,7 +103,7 @@ syn case ignore
+@@ -105,7 +105,7 @@ syn case ignore
  "%% PreAmble Section %%
  "Copyright and Serial were deprecated by License and Epoch
  syn region specPreAmbleDeprecated oneline matchgroup=specError start='^\(Copyright\|Serial\)' end='$' contains=specEmail,specURL,specURLMacro,specLicense,specColon,specVariables,specSpecialChar,specMacroIdentifier
--syn region specPreAmble oneline matchgroup=specCommand start='^\(Prereq\|Summary\|Name\|Version\|Packager\|Requires\|Recommends\|Suggests\|Supplements\|Enhances\|Icon\|URL\|SourceLicense\|Source\d*\|Patch\d*\|Prefix\|Packager\|Group\|License\|Release\|BuildRoot\|Distribution\|Vendor\|Provides\|ExclusiveArch\|ExcludeArch\|ExclusiveOS\|Obsoletes\|BuildArch\|BuildArchitectures\|BuildRequires\|BuildConflicts\|BuildPreReq\|Conflicts\|AutoRequires\|AutoReq\|AutoReqProv\|AutoProv\|Epoch\)' end='$' contains=specEmail,specURL,specURLMacro,specLicense,specColon,specVariables,specSpecialChar,specMacroIdentifier
-+syn region specPreAmble oneline matchgroup=specCommand start='^\(Prereq\|Summary\|Name\|Version\|Packager\|Requires\|Recommends\|Suggests\|Supplements\|Enhances\|Icon\|URL\|SourceLicense\|Source\d*\|Patch\d*\|Prefix\|Packager\|Group\|License\|Release\|BuildRoot\|Distribution\|Vendor\|Provides\|ExclusiveArch\|ExcludeArch\|ExclusiveOS\|Obsoletes\|BuildArch\|BuildArchitectures\|BuildRequires\|BuildConflicts\|BuildPreReq\|Conflicts\|AutoRequires\|AutoReq\|AutoReqProv\|AutoProv\|Epoch\|BuildSystem\|BuildOption\)' end='$' contains=specEmail,specURL,specURLMacro,specLicense,specColon,specVariables,specSpecialChar,specMacroIdentifier
+-syn region specPreAmble oneline matchgroup=specCommand start='^\(Prereq\|Summary\|Name\|Version\|Packager\|Requires\|Recommends\|Suggests\|Supplements\|Enhances\|Icon\|URL\|SourceLicense\|Source\d*\|Patch\d*\|Prefix\|Packager\|Group\|License\|Release\|BuildRoot\|Distribution\|DistTag\|Vendor\|Provides\|ExclusiveArch\|ExcludeArch\|ExclusiveOS\|Obsoletes\|BuildArch\|BuildArchitectures\|BuildRequires\|BuildConflicts\|BuildPreReq\|Conflicts\|AutoRequires\|AutoReq\|AutoReqProv\|AutoProv\|Epoch\|ModularityLabel\)' end='$' contains=specEmail,specURL,specURLMacro,specLicense,specColon,specVariables,specSpecialChar,specMacroIdentifier
++syn region specPreAmble oneline matchgroup=specCommand start='^\(Prereq\|Summary\|Name\|Version\|Packager\|Requires\|Recommends\|Suggests\|Supplements\|Enhances\|Icon\|URL\|SourceLicense\|Source\d*\|Patch\d*\|Prefix\|Packager\|Group\|License\|Release\|BuildRoot\|Distribution\|DistTag\|Vendor\|Provides\|ExclusiveArch\|ExcludeArch\|ExclusiveOS\|Obsoletes\|BuildArch\|BuildArchitectures\|BuildRequires\|BuildConflicts\|BuildPreReq\|Conflicts\|AutoRequires\|AutoReq\|AutoReqProv\|AutoProv\|Epoch\|ModularityLabel\|BuildSystem\|BuildOption\)' end='$' contains=specEmail,specURL,specURLMacro,specLicense,specColon,specVariables,specSpecialChar,specMacroIdentifier
  
  "%% Description Section %%
  syn region specDescriptionArea matchgroup=specSection start='^%description' end='^%'me=e-1 contains=specDescriptionOpts,specEmail,specURL,specNumber,specMacroIdentifier,specComment
-@@ -112,7 +112,7 @@ syn region specDescriptionArea matchgrou
+@@ -114,7 +114,7 @@ syn region specDescriptionArea matchgrou
  syn region specPackageArea matchgroup=specSection start='^%package' end='^%'me=e-1 contains=specPackageOpts,specPreAmble,specComment
  
  "%% Scripts Section %%
