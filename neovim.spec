@@ -63,6 +63,7 @@ Provides:	texteditor
 %if %{cross_compiling}
 BuildRequires:	neovim
 %endif
+BuildRequires:	make
 BuildSystem:	cmake
 BuildOption:	-DPREFER_LUA:BOOL=OFF
 BuildOption:	-DUSE_BUNDLED_LUAJIT:BOOL=OFF
