@@ -1,0 +1,31 @@
+diff -up neovim-0.12.4/CMakeLists.txt.omv~ neovim-0.12.4/CMakeLists.txt
+--- neovim-0.12.4/CMakeLists.txt.omv~	2026-07-05 00:00:00.000000000 +0000
++++ neovim-0.12.4/CMakeLists.txt	2026-08-23 00:00:00.000000000 +0000
+@@ -206,6 +206,12 @@ mark_as_advanced(LUA_GEN_PRG)
+ message(STATUS "Using Lua interpreter for code generation: ${LUA_GEN_PRG}")
+ 
+ option(COMPILE_LUA "Pre-compile Lua sources into bytecode (for sources that are included in the binary)" ON)
++if(CMAKE_CROSSCOMPILING)
++  # LuaJIT bytecode is architecture-specific; string.dump() on the host
++  # interpreter would embed unloadable blobs in the target binary.
++  set(COMPILE_LUA OFF CACHE BOOL "Pre-compile Lua sources into bytecode (for sources that are included in the binary)" FORCE)
++  message(STATUS "Cross-compiling: not precompiling Lua bytecode")
++endif()
+ 
+ # Lint
+ option(CI_LINT "Abort if lint programs not found" OFF)
+diff -up neovim-0.12.4/src/nvim/CMakeLists.txt.omv~ neovim-0.12.4/src/nvim/CMakeLists.txt
+--- neovim-0.12.4/src/nvim/CMakeLists.txt.omv~	2026-07-05 00:00:00.000000000 +0000
++++ neovim-0.12.4/src/nvim/CMakeLists.txt	2026-08-23 00:00:00.000000000 +0000
+@@ -530,7 +530,10 @@ add_custom_command(
+     "${NVIM_VERSION_DEF_H}"
+   DEPENDS "${PROJECT_BINARY_DIR}/cmake.config/auto/versiondef-$<CONFIG>.h")
+ 
+-if(CMAKE_CROSSCOMPILING AND NLUA0_HOST_PRG)
++# Honor a prebuilt host nlua0 even if CMAKE_CROSSCOMPILING was not
++# detected (e.g. qemu-user can run the target compiler smoke test).
++# The target nlua0 module cannot be dlopened by the host Lua interpreter.
++if(NLUA0_HOST_PRG)
+   set(LUA_GEN ${LUA_GEN_PRG} ${GENERATOR_PRELOAD} ${PROJECT_SOURCE_DIR} ${NLUA0_HOST_PRG} ${PROJECT_BINARY_DIR})
+   set(LUA_GEN_DEPS ${GENERATOR_PRELOAD} ${NLUA0_HOST_PRG})
+ else()

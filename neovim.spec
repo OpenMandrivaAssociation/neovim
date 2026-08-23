@@ -1,10 +1,8 @@
 # build will override this anyway, so let's skip it
 %define _fortify_cflags %nil
 %if %{cross_compiling}
-# FIXME The build system throws out some compiler flags while
-# running cpp -E, so it doesn't invoke the correct -target
-# when using clang (but does when using gcc, because it
-# calls the separate $TARGET-cpp)
+# clang -E historically dropped --target when the build system invoked
+# the preprocessor; $TARGET-cpp from gcc does not. Keep gcc for now.
 %define prefer_gcc 1
 %endif
 
@@ -20,6 +18,7 @@ Source1:        sysinit.vim
 Source2:        spec-template
 Patch0:		neovim-c++syntax-qt-extensions.patch
 Patch1:		neovim-spec-syntax-updates.patch
+Patch2:		neovim-cross-compile.patch
 BuildRequires:	gperf
 BuildRequires:	gettext
 BuildRequires:	luajit
@@ -70,6 +69,12 @@ BuildOption:	-DUSE_BUNDLED_LUAJIT:BOOL=OFF
 BuildOption:	-DUSE_BUNDLED:BOOL=OFF
 BuildOption:	-DENABLE_TRANSLATIONS:BOOL=ON
 BuildOption:	-DLUA_PRG=%{_bindir}/luajit
+%if %{cross_compiling}
+BuildOption:	-DNVIM_HOST_PRG=%{_bindir}/nvim
+# Path is exported from %%conf -p (rpm does not expand %%{_builddir} here).
+BuildOption:	-DNLUA0_HOST_PRG=$NLUA0_HOST_SO
+BuildOption:	-DCOMPILE_LUA:BOOL=OFF
+%endif
 
 %description
 Neovim is a project that seeks to aggressively refactor Vim in order to:
@@ -87,10 +92,38 @@ BuildArch:	noarch
 Data files for %{name}.
 
 %prep -a
+
+%conf -p
 %if %{cross_compiling}
-# Avoid running TARGET binaries...
-sed -i -e 's,\$<TARGET_FILE:nvim>,%{_bindir}/nvim,g' src/nvim/po/CMakeLists.txt test/CMakeLists.txt
-sed -i -e 's,\${PROJECT_BINARY_DIR}/bin/nvim,%{_bindir}/nvim,g' runtime/CMakeLists.txt
+# nlua0 is a Lua C module loaded by the host interpreter during codegen.
+# The cross-built copy is the wrong ELF architecture, so build a host one.
+HOST_LUA_INC=
+for d in /usr/include/luajit-2.1 /usr/include/luajit-2.0 /usr/include/lua5.1; do
+	if [ -f "$d/lua.h" ]; then
+		HOST_LUA_INC="$d"
+		break
+	fi
+done
+HOST_LPEG=
+for f in /usr/lib64/lua/5.1/lpeg.so /usr/lib/lua/5.1/lpeg.so; do
+	if [ -f "$f" ]; then
+		HOST_LPEG="$f"
+		break
+	fi
+done
+if [ -z "$HOST_LUA_INC" ] || [ -z "$HOST_LPEG" ]; then
+	echo "Host luajit headers and luajit-lpeg are required to cross-compile neovim" >&2
+	exit 1
+fi
+# Use the host compiler, not the target toolchain in CC/CFLAGS.
+export NLUA0_HOST_SO="$(pwd)/host-nlua0/nlua0.so"
+mkdir -p host-nlua0
+/usr/bin/cc -shared -fPIC -O2 -DNVIM_NLUA0 \
+	-o "$NLUA0_HOST_SO" \
+	src/nlua0.c src/mpack/*.c \
+	-I src -I "$HOST_LUA_INC" \
+	"$HOST_LPEG"
+test -s "$NLUA0_HOST_SO"
 %endif
 
 %build -p
