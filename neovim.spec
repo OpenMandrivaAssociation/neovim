@@ -74,6 +74,10 @@ BuildOption:	-DNVIM_HOST_PRG=%{_bindir}/nvim
 # Path is exported from %%conf -p (rpm does not expand %%{_builddir} here).
 BuildOption:	-DNLUA0_HOST_PRG=$NLUA0_HOST_SO
 BuildOption:	-DCOMPILE_LUA:BOOL=OFF
+# find_program() otherwise picks sysroot gettext tools when crosscompiling (wrong ELF).
+BuildOption:	-DXGETTEXT_PRG=%{_bindir}/xgettext
+BuildOption:	-DGETTEXT_MSGFMT_EXECUTABLE=%{_bindir}/msgfmt
+BuildOption:	-DGETTEXT_MSGMERGE_EXECUTABLE=%{_bindir}/msgmerge
 %endif
 
 %description
